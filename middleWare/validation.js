@@ -1,5 +1,8 @@
 const {isValid, isValidEmail,isValidNumber, isValidPhone, isValidPostalCode, isValidRequestBody, isValidString, numberInString} = require('./function')
 
+
+
+
 const validateBody = async function (req, res, next) {
   const {
     context,
@@ -78,7 +81,15 @@ const validateBody = async function (req, res, next) {
      if(!isValidString(source.address.country)) return res.status(400).send({status : false, message : "source address country should contains alphabets only"})
     
    if(!isValid(source.latitude)) return res.status(400).send({status : false, message : "source latitute is required"})
+   if(typeof source.latitude !== 'string') return res.status(400).send({status : false, message : "source latitude should be in string"})
+   
+  // if(!latRegex.test(source.latitude)) return res.status(400).send({status : false , message : "valid source latitute should be present"})
+
    if(!isValid(source.longitude)) return res.status(400).send({status : false, message : "source longitute is required"})
+   if(typeof source.longitude !== 'string') return res.status(400).send({status : false, message : "source longitude should be in string"})
+   
+   //if(!lngRegex.test(source.longitude)) return res.status(400).send({status : false , message : "valid source longitute should be present"})
+
 
 
 
@@ -118,7 +129,11 @@ const validateBody = async function (req, res, next) {
     if(!isValid(destination.address.coordinates)) return res.status(400).send({status : false, message : "destination address coordinates country is required"})
 
      if(!isValid(destination.address.coordinates.latitude)) return res.status(400).send({status : false, message : "destination address coordinates latitute  is required"})
+     if(typeof destination.address.coordinates.latitude !== 'string') return res.status(400).send({status : false, message : "destination latitude should be in string"})
+    // if(!latRegex.test(destination.address.coordinates.latitude)) return res.status(400).send({status : false , message : "valid destination latitute is required"})
      if(!isValid(destination.address.coordinates.longitude)) return res.status(400).send({status : false, message : "destination address coordinates longitute is required"})
+    //  if(typeof destination.address.coordinates.longitute !== 'string') return res.status(400).send({status : false, message : "destination longitute should be in string"})
+    // if(!lngRegex.test(destination.address.coordinates.longitude)) return res.status(400).send({status : false , message : "valid destination longitute should be present"})
 
 ////////////////////////////////////////////////////////VENDOR VALIDATION ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
